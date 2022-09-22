@@ -5,6 +5,9 @@
 #define STB_IMAGE_IMPLEMENTATION
 #include <stb/stb_image.h>
 
+#include <ft2build.h>
+#include FT_FREETYPE_H
+
 #include <glad/glad.h>
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_mixer.h>
@@ -58,6 +61,16 @@ int main (int argc, char **argv) {
 	Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048);
 	music = Mix_LoadMUS("wav/low.wav");
 	sound = Mix_LoadWAV("wav/sound1.wav");
+	
+	// FONT IMPLEMENTATION
+	FT_Library font;
+	FT_Init_FreeType(&font);
+	FT_Face font_face;
+	FT_New_Face(font, "fonts/pixel.ttf", 0, &font_fame);
+	FT_Set_Pixel_Sizes(font_face, 0, 48);
+	FT_Load_Char(font_face, 'X', FT_LOAD_RENDER);
+
+
 
 	// OPENGL CONTEXT CREATION
 	glViewport(0, 0, canvas_width, canvas_height);
@@ -211,6 +224,10 @@ int main (int argc, char **argv) {
 		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 		SDL_GL_SwapWindow(window);
 		///////// END RENDER LOOP //////////
+
+		////////// RENDER TEXT //////////
+		RnderText(shader, "This is sample text!", 25.0f, 25.0f, 1.0f,vec(0.5, 0.8f, 0.2f));
+		////////// END OF RENDER TEXT //////////
 
 		////////// AUDIO LOOP //////////
 		////////// END OF AUDIO LOOP //////////

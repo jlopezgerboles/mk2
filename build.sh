@@ -9,7 +9,7 @@ echo "Building game initialized"
 assembly="game"
 compilerflags="-g -fPIC"
 includeflags="-Idev/mk2 -I./glad/include"
-linkerflags="-g -shared -lSDL2 -lSDL2_mixer -msse2 -lm -ldl -no-pie"
+linkerflags="-g -shared -lSDL2 -lSDL2_mixer lfreetype2 -msse2 -lm -ldl -no-pie"
 echo "Compilation is using the Compiler flags: " $compilerflags
 echo "Compilation is using the Include  flags: " $includeflags
 echo "Compilation is using the Linker   flags: " $linkerflags
